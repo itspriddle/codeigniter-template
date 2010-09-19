@@ -3,6 +3,14 @@
 This is a blank [CodeIgniter](http://codeigniter.com) 1.7.2 project
 with the following enhancements:
 
+
+## ActionMailer for Email
+
+Load mailers with `$this->load->mailer('mailer_file')`. Mailers
+should be kept in `application/mailers`. See the [repo](http://github.com/itspriddle/codeigniter-action-mailer)
+for more info.
+
+
 ## Easy View Loading
 
 Views are automatically loaded and rendered for non AJAX requests.

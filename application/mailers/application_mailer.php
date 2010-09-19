@@ -3,6 +3,8 @@
 /**
  * Application Mailer
  *
+ * Load with: $this-load->mailer("application_mailer")
+ *
  * @package     Mailers
  * @author      Joshua Priddle <jpriddle@nevercraft.net>
  */
@@ -15,6 +17,20 @@ class ApplicationMailer extends ActionMailer {
 		$this->from = 'nobody@example.com';
 	}
 
+	//-----------------------------------------------------------------------
+
+  /**
+   * test
+   *
+   * Send with deliver_test();
+   *
+   * From a controller with mailer loaded:
+   * $this->application_mailer->deliver_test();
+   *
+   * @return void
+   * @author Joshua Priddle
+   */
+
 	public function test()
 	{
 		$this->to           = 'jpriddle@nevercraft.net';
@@ -23,5 +39,5 @@ class ApplicationMailer extends ActionMailer {
 	}
 }
 
-/* End of file Template_hook.php */
+/* End of file application_mailer.php */
 /* Location: ./application/mailers/application_mailer.php */

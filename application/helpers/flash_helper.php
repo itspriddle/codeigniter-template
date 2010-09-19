@@ -47,7 +47,7 @@ class flash {
 	static function add($message, $type = 'warning', $method = 'flash')
 	{
 		$CI =& get_instance();
-		
+
 		if ($method == 'flash')
 		{
 			if (($flash = $CI->session->userdata("{$CI->session->flashdata_key}:new:NOTICE")) !== FALSE)
@@ -78,8 +78,8 @@ class flash {
 		}
 
 	}
-	
-    // ------------------------------------------------------------------------
+
+	// ------------------------------------------------------------------------
 
 	/**
 	 * Add a warning message
@@ -93,8 +93,8 @@ class flash {
 	{
 		self::add($message, 'warning', $method);
 	}
-	
-    // ------------------------------------------------------------------------
+
+	// ------------------------------------------------------------------------
 
 	/**
 	 * Add a success message
@@ -126,31 +126,31 @@ class flash {
 		$CI =& get_instance();
 
 		$FN = array();
-		
+
 		$FLASH = $CI->session->flashdata('NOTICE');
-		
+
 		$STATIC = $CI->session->userdata(':static:NOTICE');
 
 		if ($FLASH === FALSE && $STATIC === FALSE)	return;
-		
+
 		if ($STATIC !== FALSE)
 		{
 			$FN = $FN + $STATIC;
 			$CI->session->unset_userdata(':static:NOTICE');
 		}
-		
+
 		if ($FLASH !== FALSE)
 		{
 			$FN = $FN + $FLASH;
 		}
-	
+
 		if ($template == NULL)
 		{
 			$template = self::_default_template();
 		}
 
 		$out = $template['header'];
-		
+
 		foreach ($FN as $F)
 		{
 			foreach ($F as $type => $msg)
@@ -169,7 +169,7 @@ class flash {
 		echo $out;
 	}
 
-    // ------------------------------------------------------------------------
+	// ------------------------------------------------------------------------
 
 	/**
 	 * Default Template
@@ -192,7 +192,10 @@ class flash {
 		);
 
 	}
-	
+
 	// ------------------------------------------------------------------------
-	
+
 }
+
+/* End of file flash_helper.php */
+/* Location: ./application/helpers/flash_helper.php */

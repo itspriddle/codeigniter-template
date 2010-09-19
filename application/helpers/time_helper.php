@@ -47,6 +47,7 @@ if ( ! function_exists('seconds_to_time'))
  * @param   string  $seconds
  * @return  string
  */
+
 if ( ! function_exists('time_to_seconds'))
 {
 	function time_to_seconds($timestamp = '00:00:00')

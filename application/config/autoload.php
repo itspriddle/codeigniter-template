@@ -51,7 +51,7 @@ $autoload['libraries'] = array();
 |	$autoload['helper'] = array('url', 'file');
 */
 
-$autoload['helper'] = array('flash', 'url');
+$autoload['helper'] = array('flash', 'url', 'string');
 
 
 /*

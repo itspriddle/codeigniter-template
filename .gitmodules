@@ -1,0 +1,3 @@
+[submodule "vendor/codeigniter-action-mailer"]
+	path = vendor/codeigniter-action-mailer
+	url = git://github.com/itspriddle/codeigniter-action-mailer.git

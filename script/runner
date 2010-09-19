@@ -1,0 +1,88 @@
+#!/usr/bin/php -q
+<?php
+
+/*
+|--------------------------------------------------------------
+| RUNNER JOB BOOTSTRAPPER
+|--------------------------------------------------------------
+|
+| Use this file to call any controller function:
+|	./runner --run=/controller/method [--show-output] [--log-file=logfile] [--time-limit=N]
+|
+| GOTCHA: Do not load any authentication or session libraries in
+| controllers you want to run via cron. If you do, they probably
+| won't run right.
+|
+*/
+
+define('RUNNER_CI_INDEX', realpath(dirname(__FILE__).'/../public/index.php'));
+define('RUNNER', TRUE);   // Test for this in your controllers if you only want them accessible via cron
+
+# Parse the command line
+$script = array_shift($argv);
+$cmdline = implode(' ', $argv);
+$usage = "Usage: {$_SERVER['PHP_SELF']} --run=/controller/method [--silent][-s] [--log-file=logfile] [--time-limit=N]\n\n";
+$required = array('--run' => FALSE);
+foreach ($argv as $arg)
+{
+	@list($param, $value) = explode('=', $arg);
+	switch ($param)
+	{
+		case '--run':
+			// Simulate an HTTP request
+			$_SERVER['PATH_INFO']   = $value;
+			$_SERVER['REQUEST_URI'] = $value;
+			$required['--run']      = TRUE;
+			break;
+
+		case '--silent':
+		case '-s':
+			define('RUNNER_FLUSH_BUFFERS', FALSE);
+			break;
+
+		case '--log-file':
+			if (is_writable($value)) define('RUNNER_LOG', $value);
+			else die("Logfile {$value} does not exist or is not writable!\n\n");
+			break;
+
+		case '--time-limit':
+			define('RUNNER_TIME_LIMIT', $value);
+			break;
+
+		default:
+			die($usage);
+	}
+}
+
+if ( ! defined('RUNNER_FLUSH_BUFFERS')) define('RUNNER_FLUSH_BUFFERS', TRUE);
+if ( ! defined('RUNNER_LOG'))           define('RUNNER_LOG', realpath(dirname(__FILE__).'/../').'/application/log/runner.log');
+if ( ! defined('RUNNER_TIME_LIMIT'))    define('RUNNER_TIME_LIMIT', 0);
+
+foreach ($required as $arg => $present) if ( ! $present) die($usage);
+
+set_time_limit(RUNNER_TIME_LIMIT);
+
+ob_start();
+
+chdir(dirname(RUNNER_CI_INDEX));
+require(RUNNER_CI_INDEX);
+
+$output = ob_get_contents();
+
+if (RUNNER_FLUSH_BUFFERS === TRUE) while (@ob_end_flush());
+else ob_end_clean();
+
+# Log the results of this run
+$now = date('Y-m-d H:i:s');
+$log = sprintf("### START %s %s %s\n%s\n### END %s\n\n",
+	$now,
+	$_SERVER['PHP_SELF'],
+	$cmdline,
+	$output,
+	$now
+);
+
+error_log($log, 3, RUNNER_LOG);
+
+/* End of file runner */
+/* Location: ./script/runner */

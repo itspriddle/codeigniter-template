@@ -28,7 +28,6 @@ class ApplicationMailer extends ActionMailer {
    * $this->application_mailer->deliver_test();
    *
    * @return void
-   * @author Joshua Priddle
    */
 
 	public function test()

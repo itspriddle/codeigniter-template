@@ -35,6 +35,14 @@ class MY_Loader extends CI_Loader {
 
 	// --------------------------------------------------------------------
 
+	/**
+	 * Load mailer from APPPATH/mailers
+	 *
+	 * @param   string $mailer
+	 * @return  void
+	 * @author  Joshua Priddle
+	 */
+
 	function mailer($mailer)
 	{
 		$CI =& get_instance();

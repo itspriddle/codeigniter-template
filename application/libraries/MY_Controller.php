@@ -1,12 +1,14 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-/*
-| -------------------------------------------------------------------------
-| MY_Controller
-| -------------------------------------------------------------------------
-|
-| This file will be included after CI's parent Controller class
-|
-*/
+
+/**
+ * ApplicationController (MY_Controller)
+ *
+ * This controller will be loaded immediately after CodeIgniter's base
+ * Controller class. All Controllers should inherit from this class.
+ *
+ * @author  Joshua Priddle <jpriddle@nevercraft.net
+ * @package Controllers
+ **/
 
 class ApplicationController extends Controller {
 
@@ -20,6 +22,8 @@ class ApplicationController extends Controller {
 		log_message('debug', 'Application Class Initialized');
 	}
 
+	// --------------------------------------------------------------------
+
 	public function is_ajax()
 	{
 		return isset($_SERVER['HTTP_X_REQUESTED_WITH']) &&
@@ -27,6 +31,17 @@ class ApplicationController extends Controller {
 	}
 
 }
+
+/**
+ * AdminController
+ *
+ * Uncomment this and add special functions for admin specific controllers
+ *
+ * @author  Joshua Priddle <jpriddle@nevercraft.net
+ * @package Controllers
+ */
+
+class AdminController extends ApplicationController { }
 
 /* End of file MY_Controller.php */
 /* Location: ./application/libraries/MY_Controller.php */

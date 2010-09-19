@@ -1,4 +1,13 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+/**
+ * Template Hook
+ *
+ * This hook automatically loads views based on their controller/method names.
+ *
+ * @author  Joshua Priddle <jpriddle@nevercraft.net
+ * @version 0.0.1
+ * @package Hooks
+ **/
 
 class TemplateHook {
 

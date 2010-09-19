@@ -1,1 +1,1 @@
-../../vendor/codeigniter-action-mailer/ActionMailer.php
+../../vendor/codeigniter-action-mailer/libraries/ActionMailer.php
